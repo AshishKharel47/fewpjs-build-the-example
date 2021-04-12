@@ -4,8 +4,23 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-
-
+let articleHearts= document.querySelectorAll(".like-glyph")
+function likeCallBack(e){
+  let heart = e.target;
+  mimicServerCall()
+  .then(function(serverMessage){
+    alert("You notified the server!");
+    alert(serverMessage);
+    heart.innerText=EMPTY_HEART[heart.innerText];
+    heart.style.color=FULL_HEART[heart.style.color];
+  })
+  .catch(function(error){
+    alert("something went Wrong!");
+    });
+}
+for (let glyph of articleHearts){
+  glyph.addEventListener("click",likeCallBack);
+}
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
